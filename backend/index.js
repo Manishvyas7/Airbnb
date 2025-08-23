@@ -1,9 +1,16 @@
 import express from "express"
-let port = 8000 
+import dotenv from "dotenv"
+import connectDb from "./config/db.js"
+import authRouter from "./routes/auth.route.js"
+
+dotenv.config()
+let port = process.env.PORT || 6000 
+
 let app = express()
-app.get("/",(req,res)=>{
-    res.send("Hello form server")
-})
+
+app.use("api/auth", authRouter)
+
 app.listen(port,()=>{
+    connectDb()
     console.log("server started")
 })
