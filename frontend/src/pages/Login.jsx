@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {IoMdEye} from "react-icons/io";
 import { IoMdEyeOff } from 'react-icons/io';
+import { FaArrowLeftLong} from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -8,6 +9,9 @@ function Login() {
         let navigate = useNavigate()
   return (
      <div className='w-[100vw] h-[100vh] flex items-center justify-center'>
+        <div className='w-[50px] h-[50px] bg-[red] cursor-pointer absolute top-[1%]
+                right-[95%] rounded-[50%] flex items-center justify-center' onClick={()=>navigate("/")}><FaArrowLeftLong className='w-
+                [25px] h-[25px] text-[white]' /></div>
             <form action="" className='max-w-[900px] w-[90%] h-[600px]
             flex items-center justify-center flex-col md:items-start
             gap-[10px]'>
