@@ -1,12 +1,31 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {IoMdEye} from "react-icons/io";
 import { IoMdEyeOff } from 'react-icons/io';
 import { FaArrowLeftLong} from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
+import { AuthDataContext } from '../Context/AuthContext';
+import axios from 'axios';
 
 function Login() {
         let [show,setShow] = useState(false)
+        let {serverUrl} = useContext (AuthDataContext)
+        let [email, setEmail] = useState("")
+        let [password, setPassword] = useState("")
         let navigate = useNavigate()
+        const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await axios.post(
+        `${serverUrl}/api/auth/login`,
+        { email, password },
+        { withCredentials: true }
+      );
+      console.log("Signup success:", result.data);
+      navigate("/login"); // redirect after signup
+    } catch (error) {
+      console.error("Signup error:", error.response?.data || error.message);
+    }
+  };
   return (
      <div className='w-[100vw] h-[100vh] flex items-center justify-center'>
         <div className='w-[50px] h-[50px] bg-[red] cursor-pointer absolute top-[1%]
@@ -14,19 +33,21 @@ function Login() {
                 [25px] h-[25px] text-[white]' /></div>
             <form action="" className='max-w-[900px] w-[90%] h-[600px]
             flex items-center justify-center flex-col md:items-start
-            gap-[10px]'>
+            gap-[10px]' onSubmit={handleLogin}>
                 <h1 className='text-[30px] text-[black]'>Welcome To AirBnb</h1>
                 <div className='w-[90%] flex items-start justify-start
                 flex-col gap-[10px]'>
                     <label htmlFor="email" className='text-[20px]'>Email</label>
                     <input type="text" id='email' className='w-[90%] h-[40px] 
-                    border-[2px] border-[#555656] rounded-lg text-[18px] px-[20px]' />
-                </div>
+                    border-[2px] border-[#555656] rounded-lg text-[18px] px-[20px]'
+                    required onChange={(e) => setEmail(e.target.value)} value={email} />
+                </div >
                 <div className='w-[90%] flex items-start justify-start
                 flex-col gap-[10px] relative'>
                     <label htmlFor="password" className='text-[20px]'>Password</label>
                     <input type={show?"text":"password"} id='password' className='w-[90%] h-[40px] 
-                    border-[2px] border-[#555656] rounded-lg text-[18px] px-[20px]' />
+                    border-[2px] border-[#555656] rounded-lg text-[18px] px-[20px]' 
+                    required onChange={(e) => setPassword(e.target.value)} value={password}/>
                     {!show && <IoMdEye className='w-[22px] h-[22px] absolute right-
                     [12%] bottom-[10px] cursor-pointer' onClick={()=>setShow(prev => !prev)}/>}
                     {show && <IoMdEyeOff className='w-[22px] h-[22px] absolute right-
