@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {FiSearch} from "react-icons/fi";
 import {GiHamburgerMenu} from "react-icons/gi";
 import {CgProfile} from "react-icons/cg";
@@ -14,6 +14,7 @@ import {BiBuildingHouse} from "react-icons/bi";
 import logo from "../assets/logo.png"
 
 function Nav() {
+    let [showpopup,setShowpopup] = useState(false)
   return (
     <div>
         <div className='w-[100vw] min-h-[80px] border-b-1px border-[#dcdcdc] px-[20px] 
@@ -25,24 +26,27 @@ function Nav() {
                 <button className='absolute p-[10px] rounded-[50px] bg-[red]
                 right-[3%] top-[5px]'><FiSearch className='w-[20px] h-[20px] text-[white]'/></button>
             </div>
-            <div className='flex items-center justify-center gap-[10px]'>
+            <div className='flex items-center justify-center gap-[10px] relative'>
                 <span className='text-[18px] cursor-pointer rounded-[50px]
-                hover:bg-[#ded9d9] px-[8px] py-[5px]'>List Your Home</span>
+                hover:bg-[#ded9d9] px-[8px] py-[5px] '>List Your Home</span>
                 <button className='px-[20px] py-[10px] flex items-center
                 justify-center gap-[5px] border-[1px] border-[#8d8c8c]
-                rounded-[50px] hover:shadow-lg'>
+                rounded-[50px] hover:shadow-lg'onClick={()=>setShowpopup(prev=>!prep)}>
                     <span><GiHamburgerMenu className='w-[20px] h-[20px]'/></span>
                     <span><CgProfile className='w-[23px] h-[23px]'/></span>
                     </button>
-                    <div className='w-[220px] h-[250px] absolute bg-slate-50 top-[110%] right-[10%] border-[1px] border-[#aaa9a9] z-10 rounded-lg' >
-                        <ul className='w-[100%] h-[100%] text-[17px] flex items-start justify-around flex-col py-[10px]'>
-                            <li>LOGIN</li>
-                            <li>LOGOUT</li>
-                            <li>LIST YOUR HOME</li>
-                            <li>MY LISTINGS</li>
-                            <li>CHECK BOOKINGS</li>
+                    {showpopup && <div className='w-[220px] h-[250px] absolute bg-slate-50 top-[110%] 
+                    right-[10%] border-[1px] border-[#aaa9a9] z-10 rounded-lg'>
+                        <ul className='w-[100%] h-[100%] text-[17px] flex items-start
+                        justify-around flex-col py-[10px]'>
+                            <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'>LOGIN</li>
+                            <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'>LOGOUT</li>
+                            <div className='w-[100%] h-[1px] bg-[#c1c0c0] '></div>
+                            <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'>LIST YOUR HOME</li>
+                            <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'>MY LISTINGS</li>
+                            <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointerf'>CHECK BOOKINGS</li>
                         </ul>
-                    </div>
+                    </div>}
             </div>
         </div>
         <div className='w-[100vw] h-[85px] bg-white flex items-center
