@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext,useState } from 'react'
 import {FiSearch} from "react-icons/fi";
 import {GiHamburgerMenu} from "react-icons/gi";
 import {CgProfile} from "react-icons/cg";
@@ -13,10 +13,20 @@ import {FaTreeCity} from 'react-icons/fa6';
 import {BiBuildingHouse} from "react-icons/bi";
 import logo from "../assets/logo.png"
 import {useNavigate} from "react-router-dom";
+import { AuthDataContext } from '../Context/AuthContext';
 
 function Nav() {
     let [showpopup,setShowpopup] = useState(false)
     let navigate = useNavigate()
+    let {serverUrl} = useContext(AuthDataContext)
+    const handleLogOut = async() => {
+        try{
+            let result = await axios.post(serverUrl + "/api/auth/logout",{withCredentials: true})
+            console.log(result)
+        }catch(error){
+            console.log(error)
+        }
+    }
   return (
     <div>
         <div className='w-[100vw] min-h-[80px] border-b-1px border-[#dcdcdc] px-[20px] 
@@ -48,7 +58,7 @@ function Nav() {
   LOGIN
 </li>
 
-                            <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'>LOGOUT</li>
+                            <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer' onClick={handleLogOut}>LOGOUT</li>
                             <div className='w-[100%] h-[1px] bg-[#c1c0c0] '></div>
                             <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'>LIST YOUR HOME</li>
                             <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'>MY LISTINGS</li>
