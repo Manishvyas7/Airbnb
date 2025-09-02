@@ -12,15 +12,17 @@ import {IoBedOutline} from 'react-icons/io5';
 import {FaTreeCity} from 'react-icons/fa6';
 import {BiBuildingHouse} from "react-icons/bi";
 import logo from "../assets/logo.png"
+import {useNavigate} from "react-router-dom";
 
 function Nav() {
     let [showpopup,setShowpopup] = useState(false)
+    let navigate = useNavigate()
   return (
     <div>
         <div className='w-[100vw] min-h-[80px] border-b-1px border-[#dcdcdc] px-[20px] 
         flex items-center justify-between'>
             <div><img src={logo} alt="" className='w-[60px]'/></div>
-            <div className='w-[35%] relative'>
+            <div className='w-[35%] relative hidden md:block'>
                 <input type="text" className='w-[100%] px-[30px] py-[10px] border-[2px]
                 border-[#bdbaba] outline-none overflow-auto rounded-[30px] text-[17px]' placeholder=' Any Where| Any Location | Any City'/>
                 <button className='absolute p-[10px] rounded-[50px] bg-[red]
@@ -28,10 +30,10 @@ function Nav() {
             </div>
             <div className='flex items-center justify-center gap-[10px] relative'>
                 <span className='text-[18px] cursor-pointer rounded-[50px]
-                hover:bg-[#ded9d9] px-[8px] py-[5px] '>List Your Home</span>
+                hover:bg-[#ded9d9] px-[8px] py-[5px] hidden md:block '>List Your Home</span>
                 <button className='px-[20px] py-[10px] flex items-center
                 justify-center gap-[5px] border-[1px] border-[#8d8c8c]
-                rounded-[50px] hover:shadow-lg'onClick={()=>setShowpopup(prev=>!prep)}>
+                rounded-[50px] hover:shadow-lg'onClick={()=>setShowpopup(prev=>!prev)}>
                     <span><GiHamburgerMenu className='w-[20px] h-[20px]'/></span>
                     <span><CgProfile className='w-[23px] h-[23px]'/></span>
                     </button>
@@ -39,7 +41,13 @@ function Nav() {
                     right-[10%] border-[1px] border-[#aaa9a9] z-10 rounded-lg'>
                         <ul className='w-[100%] h-[100%] text-[17px] flex items-start
                         justify-around flex-col py-[10px]'>
-                            <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'>LOGIN</li>
+<li 
+  className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'
+  onClick={() => navigate("/login")}
+>
+  LOGIN
+</li>
+
                             <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'>LOGOUT</li>
                             <div className='w-[100%] h-[1px] bg-[#c1c0c0] '></div>
                             <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'>LIST YOUR HOME</li>
