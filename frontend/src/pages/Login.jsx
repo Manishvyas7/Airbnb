@@ -4,11 +4,13 @@ import { IoMdEyeOff } from 'react-icons/io';
 import { FaArrowLeftLong} from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import { AuthDataContext } from '../Context/AuthContext';
+import { userDataContext } from '../Context/UserContext';
 import axios from 'axios';
 
 function Login() {
         let [show,setShow] = useState(false)
         let {serverUrl} = useContext (AuthDataContext)
+        let {userData, setUserData} = useContext(userDataContext)
         let [email, setEmail] = useState("")
         let [password, setPassword] = useState("")
         let navigate = useNavigate()
@@ -18,8 +20,9 @@ function Login() {
       const result = await axios.post(
         `${serverUrl}/api/auth/login`,
         { email, password },
-        { withCredentials: true }
-      );
+        { withCredentials: true });
+        setUserData(result.data)
+        navigate("/")
       console.log("Signup success:", result.data);
       navigate("/login"); // redirect after signup
     } catch (error) {

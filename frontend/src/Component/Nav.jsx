@@ -14,14 +14,18 @@ import {BiBuildingHouse} from "react-icons/bi";
 import logo from "../assets/logo.png"
 import {useNavigate} from "react-router-dom";
 import { AuthDataContext } from '../Context/AuthContext';
+import { userDataContext } from '../Context/UserContext';
+
 
 function Nav() {
     let [showpopup,setShowpopup] = useState(false)
     let navigate = useNavigate()
+    let {userData, setUserData} = useContext(userDataContext)
     let {serverUrl} = useContext(AuthDataContext)
     const handleLogOut = async() => {
         try{
             let result = await axios.post(serverUrl + "/api/auth/logout",{withCredentials: true})
+            setUserData(null)
             console.log(result)
         }catch(error){
             console.log(error)
@@ -45,7 +49,9 @@ function Nav() {
                 justify-center gap-[5px] border-[1px] border-[#8d8c8c]
                 rounded-[50px] hover:shadow-lg'onClick={()=>setShowpopup(prev=>!prev)}>
                     <span><GiHamburgerMenu className='w-[20px] h-[20px]'/></span>
-                    <span><CgProfile className='w-[23px] h-[23px]'/></span>
+                    {userData == null && <span><CgProfile className='w-[23px] h-[23px]'/></span>}
+                    {userData != null && <span className='w-[30px] h-[30px] bg-[#080808] text-[white]
+                    rounded-full flex items-center justify-center'>{userData?.name.slice(0,1)}</span>}
                     </button>
                     {showpopup && <div className='w-[220px] h-[250px] absolute bg-slate-50 top-[110%] 
                     right-[10%] border-[1px] border-[#aaa9a9] z-10 rounded-lg'>

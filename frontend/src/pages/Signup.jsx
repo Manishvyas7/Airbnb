@@ -4,6 +4,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthDataContext } from "../Context/AuthContext";
+import { userDataContext } from '../Context/UserContext';
 
 function Signup() {
   const [show, setShow] = useState(false);
@@ -13,6 +14,7 @@ function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  let {userData, setUserData} = useContext(userDataContext)
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -20,8 +22,10 @@ function Signup() {
       const result = await axios.post(
         `${serverUrl}/api/auth/signup`,
         { name, email, password },
-        { withCredentials: true }
+        { withCredentials: true }        
       );
+        setUserData(result.data)
+        navigate("/")
       console.log("Signup success:", result.data);
       navigate("/login"); // redirect after signup
     } catch (error) {
