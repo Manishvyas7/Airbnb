@@ -37,6 +37,19 @@ function ListingContext({children}) {
         }
     }
     let value={
+      title,setTitle,
+      description,setDescription,
+      frontEndImage1,setFrontEndImage1,
+      frontEndImage2,setFrontEndImage2,
+      frontEndImage3,setFrontEndImage3,
+      backEndImage1,setBackEndImage1,
+      backEndImage2,setBackEndImage2,
+      backEndImage3,setBackEndImage3,
+      rent,setRent,
+      city,setCity,
+      landmark,setLandmark,
+      category,setCategory,
+      handlerunaddListing
         
     }
   return (
