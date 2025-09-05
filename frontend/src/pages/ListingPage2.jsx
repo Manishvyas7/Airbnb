@@ -102,7 +102,7 @@ function ListingPage2() {
 
             </div>
             <button className='px-[50px] py-[10px] bg-[red] text-[white] text-[18px]
-                md:px-[100px] rounded-lg'disabled={!category}>Next</button>
+                md:px-[100px] rounded-lg'onClick={()=>navigate("/listingpage3")} disabled={!category}>Next</button>
         </div>
     </div>
   )

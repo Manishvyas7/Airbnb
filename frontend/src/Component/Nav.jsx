@@ -44,7 +44,7 @@ function Nav() {
             </div>
             <div className='flex items-center justify-center gap-[10px] relative'>
                 <span className='text-[18px] cursor-pointer rounded-[50px]
-                hover:bg-[#ded9d9] px-[8px] py-[5px] hidden md:block '>List Your Home</span>
+                hover:bg-[#ded9d9] px-[8px] py-[5px] hidden md:block 'onClick={()=>navigate("/listingpage1")}>List Your Home</span>
                 <button className='px-[20px] py-[10px] flex items-center
                 justify-center gap-[5px] border-[1px] border-[#8d8c8c]
                 rounded-[50px] hover:shadow-lg'onClick={()=>setShowpopup(prev=>!prev)}>
@@ -57,16 +57,13 @@ function Nav() {
                     right-[10%] border-[1px] border-[#aaa9a9] z-10 rounded-lg'>
                         <ul className='w-[100%] h-[100%] text-[17px] flex items-start
                         justify-around flex-col py-[10px]'>
-<li 
+{!userData && <li 
   className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'
-  onClick={() => navigate("/login")}
->
-  LOGIN
-</li>
+  onClick={() => {navigate("/login");setShowpopup(false)}} >LOGIN </li>}
 
-                            <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer' onClick={handleLogOut}>LOGOUT</li>
+                            {userData && <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer' onClick={() => {handleLogOut();setShowpopup(false)}}>LOGOUT</li>}
                             <div className='w-[100%] h-[1px] bg-[#c1c0c0] '></div>
-                            <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'>LIST YOUR HOME</li>
+                            <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer' onClick={()=>{navigate("/listingpage1");setShowpopup(false)}}>LIST YOUR HOME</li>
                             <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'>MY LISTINGS</li>
                             <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointerf'>CHECK BOOKINGS</li>
                         </ul>
